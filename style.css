@@ -72,16 +72,37 @@ nav ul li a:hover {
   color: var(--highlight);
 }
 
-.gallery-grid {
+/* Gallery section */
+.gallery {
+  padding: 50px 20px;
+}
+
+/* Default → MOBILE */
+.gallery-images {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* 2 × 2 */
   gap: 12px;
 }
 
-.gallery-grid img {
+.gallery-images img {
   width: 100%;
-  border-radius: 12px;
+  height: 140px;
   object-fit: cover;
+  border-radius: 14px;
+}
+
+/* LAPTOP & ABOVE */
+@media (min-width: 768px) {
+  .gallery-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .gallery-images img {
+    width: 220px;
+    height: 160px;
+  }
 }
 
 /* --------- HERO --------- */
