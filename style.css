@@ -72,6 +72,18 @@ nav ul li a:hover {
   color: var(--highlight);
 }
 
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
 /* --------- HERO --------- */
 .hero {
   height: 100vh;
