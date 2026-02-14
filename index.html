@@ -3,101 +3,197 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arivagam School of Nursing</title>
+  <meta name="description" content="Arivagam School of Nursing – Quality nursing and DMLT education in Tamil Nadu. GNM, medical lab technology, modern facilities and experienced faculty." />
+  <meta name="theme-color" content="#0d3b66" />
+  <title>Arivagam School of Nursing | Quality Healthcare Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- NAVBAR -->
-  <nav>
-    <div class="brand">
-    <img src="images/logo.jpeg" style="width: 90px; padding-right: 0px;"/>
-    <h1>Arivagam School of Nursing</h1>
-    </div>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#courses">Courses</a></li>
-      <li><a href="#facilities">Facilities</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <h2>Building a Healthier Future</h2>
-    <p>At Arivagam School of Nursing, we empower future healthcare professionals with knowledge, compassion, and technology.</p>
-    <button onclick="window.location='#about'">Learn More</button>
-  </section>
-
-  <!-- ABOUT SECTION -->
-  <section id="about">
-    <h3>About Our College</h3>
-    <p>
-      Arivagam School of Nursing is a modern institution dedicated to providing exceptional education and healthcare research facilities. 
-      With experienced faculty, world-class infrastructure, and a focus on innovation, we shape the next generation of healthcare leaders.
-    </p>
-  </section>
-
-  <!-- COURSES SECTION -->
-  <section id="courses">
-    <h3>Our Courses</h3>
-    <div class="cards">
-      <div class="card">
-        <h4>(DMLT) Diploma in Medical Laboratory Technology</h4>
-        <p>Comprehensive medical education designed to produce skilled and ethical Lab Technitions.</p>
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="brand">
+        <img src="images/logo.jpeg" alt="Arivagam School of Nursing logo" class="logo" />
+        <h1 class="brand-name">Arivagam School of Nursing</h1>
       </div>
-      <div class="card">
-        <h4>(GNM) General Nursing and Midwifery</h4>
-        <p>Training future nurses with compassion and cutting-edge clinical skills.</p>
-      </div>
-    </div>
-  </section>
+      <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- FACILITIES SECTION -->
-  <section id="facilities">
-    <h3>Campus Facilities</h3>
-    <div class="cards">
-      <div class="card">
-        <h4>Modern Labs</h4>
-        <p>Fully equipped research and clinical labs for hands-on learning and experimentation.</p>
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-tagline">Excellence in Healthcare Education</p>
+        <h2 id="hero-heading">Building a Healthier Future</h2>
+        <p class="hero-desc">At Arivagam School of Nursing, we empower future healthcare professionals with knowledge, compassion, and technology.</p>
+        <div class="hero-buttons">
+          <a href="#about" class="btn btn-primary">Learn More</a>
+          <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
       </div>
-      <div class="card">
-        <h4>24/7 Medical Support</h4>
-        <p>Round-the-clock medical facilities ensuring the well-being of every student.</p>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="stats-strip" aria-label="Key highlights">
+      <div class="stats-inner">
+        <div class="stat">
+          <span class="stat-number" data-count="15">15+</span>
+          <span class="stat-label">Years of Excellence</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Students Trained</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">2</span>
+          <span class="stat-label">Professional Courses</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Medical Support</span>
+        </div>
       </div>
-      <div class="card">
-        <h4>Library & Research Center</h4>
-        <p>Thousands of medical journals and research materials for in-depth study.</p>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section" aria-labelledby="about-heading">
+      <h3 id="about-heading" class="section-title">About Our College</h3>
+      <p class="section-subtitle">Dedicated to shaping the next generation of healthcare leaders</p>
+      <p class="section-text">
+        Arivagam School of Nursing is a modern institution dedicated to providing exceptional education and healthcare research facilities.
+        With experienced faculty, world-class infrastructure, and a focus on innovation, we prepare students for real-world challenges in nursing and medical laboratory technology.
+      </p>
+    </section>
+
+    <!-- COURSES SECTION -->
+    <section id="courses" class="section section-alt" aria-labelledby="courses-heading">
+      <h3 id="courses-heading" class="section-title">Our Courses</h3>
+      <p class="section-subtitle">Programs designed for today’s healthcare industry</p>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">DMLT</div>
+          <h4>Diploma in Medical Laboratory Technology (DMLT)</h4>
+          <p>Comprehensive medical education designed to produce skilled and ethical lab technicians.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">GNM</div>
+          <h4>General Nursing and Midwifery (GNM)</h4>
+          <p>Training future nurses with compassion and cutting-edge clinical skills.</p>
+        </article>
       </div>
-      <div class="card">
-        <h4>Student Hostel</h4>
-        <p>Comfortable and secure accommodation fostering a supportive campus life.</p>
+    </section>
+
+    <!-- FACILITIES SECTION -->
+    <section id="facilities" class="section" aria-labelledby="facilities-heading">
+      <h3 id="facilities-heading" class="section-title">Campus Facilities</h3>
+      <p class="section-subtitle">Everything you need to learn and grow</p>
+      <div class="cards">
+        <article class="card">
+          <h4>Modern Labs</h4>
+          <p>Fully equipped research and clinical labs for hands-on learning and experimentation.</p>
+        </article>
+        <article class="card">
+          <h4>24/7 Medical Support</h4>
+          <p>Round-the-clock medical facilities ensuring the well-being of every student.</p>
+        </article>
+        <article class="card">
+          <h4>Library & Research Center</h4>
+          <p>Thousands of medical journals and research materials for in-depth study.</p>
+        </article>
+        <article class="card">
+          <h4>Student Hostel</h4>
+          <p>Comfortable and secure accommodation fostering a supportive campus life.</p>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-<section class="gallery">
-  <h3>Campus Gallery</h3>
+    <!-- GALLERY -->
+    <section id="gallery" class="gallery section" aria-labelledby="gallery-heading">
+      <h3 id="gallery-heading" class="section-title">Campus Gallery</h3>
+      <p class="section-subtitle">A glimpse of our campus and facilities</p>
+      <div class="gallery-images">
+        <figure>
+          <img src="images/a.jpeg" alt="Campus view" loading="lazy" />
+        </figure>
+        <figure>
+          <img src="images/b.jpeg" alt="Laboratory" loading="lazy" />
+        </figure>
+        <figure>
+          <img src="images/c.jpeg" alt="Library" loading="lazy" />
+        </figure>
+        <figure>
+          <img src="images/d.jpeg" alt="Classroom" loading="lazy" />
+        </figure>
+      </div>
+    </section>
 
-  <div class="gallery-images">
-    <img src="images/a.jpeg" alt="Campus">
-    <img src="images/b.jpeg" alt="Laboratory">
-    <img src="images/c.jpeg" alt="Library">
-    <img src="images/d.jpeg" alt="Classroom">
-  </div>
-</section>
-
-
-  <!-- CONTACT SECTION -->
-  <section id="contact">
-    <h3>Contact Us</h3>
-    <p>Mettur road, 1912, Rana Nagar Rd, Kuruppanaickenpalayam, Tamil Nadu 638301</p>
-    <p>Email: arivagam2022@gmail.com | Phone: +91 98651 85095, +91 98427 18881</p>
-  </section>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section section-contact" aria-labelledby="contact-heading">
+      <h3 id="contact-heading" class="section-title">Contact Us</h3>
+      <p class="section-subtitle">We’d love to hear from you</p>
+      <div class="contact-block">
+        <p class="contact-address">
+          Mettur road, 1912, Rana Nagar Rd, Kuruppanaickenpalayam, Tamil Nadu 638301
+        </p>
+        <div class="contact-links">
+          <a href="mailto:arivagam2022@gmail.com" class="contact-link">arivagam2022@gmail.com</a>
+          <a href="tel:+919865185095" class="contact-link">+91 98651 85095</a>
+          <a href="tel:+919842718881" class="contact-link">+91 98427 18881</a>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Arivagam+School+of+Nursing+Kuruppanaickenpalayam+Tamil+Nadu+638301" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Directions</a>
+      </div>
+    </section>
+  </main>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 Arivagam School of Nursing. All Rights Reserved.</p>
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#about">About</a>
+        <a href="#courses">Courses</a>
+        <a href="#facilities">Facilities</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="copyright">© 2025 Arivagam School of Nursing. All Rights Reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var nav = document.querySelector('.nav-links');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function () {
+          var open = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open);
+          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        });
+        document.querySelectorAll('.nav-links a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Open menu');
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
-  
