@@ -126,21 +126,70 @@
     <!-- GALLERY -->
     <section id="gallery" class="gallery section" aria-labelledby="gallery-heading">
       <h3 id="gallery-heading" class="section-title">Campus Gallery</h3>
-      <p class="section-subtitle">A glimpse of our campus and facilities</p>
-      <div class="gallery-images">
-        <figure>
-          <img src="images/a.jpeg" alt="Campus view" loading="lazy" />
-        </figure>
-        <figure>
-          <img src="images/b.jpeg" alt="Laboratory" loading="lazy" />
-        </figure>
-        <figure>
-          <img src="images/c.jpeg" alt="Library" loading="lazy" />
-        </figure>
-        <figure>
-          <img src="images/d.jpeg" alt="Classroom" loading="lazy" />
-        </figure>
+      <p class="section-subtitle">Experience Life at Arivagam – Explore Our Campus Facilities</p>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="images/u.jpeg" alt="State-of-the-art Nursing Laboratory" loading="lazy" />
+          <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
+        </div>
+        <div class="gallery-item">
+          <img src="images/v.jpeg" alt="State-of-the-art Nursing Laboratory" loading="lazy" />
+          <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
+        </div>
+        <div class="gallery-item">
+          <img src="images/q.jpeg" alt="State-of-the-art Nursing Laboratory" loading="lazy" />
+          <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
+        </div>
+        <div class="gallery-item">
+          <img src="images/r.jpeg" alt="Modern Classroom Environment" loading="lazy" />
+          <figcaption class="gallery-caption">Modern Classrooms</figcaption>
+        </div>
+        <div class="gallery-item">
+          <img src="images/s.jpeg" alt="Library & Research Hall" loading="lazy" />
+          <figcaption class="gallery-caption">Library & Research Center</figcaption>
+        </div>
+        <div class="gallery-item">
+          <img src="images/p.jpeg" alt="Student Hostel Block" loading="lazy" />
+          <figcaption class="gallery-caption">Student Hostel</figcaption>
+        </div>
       </div>
+      <style>
+        .gallery-grid {
+          display: grid;
+          gap: 2rem;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          margin-top: 2rem;
+        }
+        .gallery-item {
+          background: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          transition: box-shadow 0.2s;
+        }
+        .gallery-item:hover {
+          box-shadow: 0 8px 32px rgba(0,60,90,0.18);
+        }
+        .gallery-item img {
+          width: 100%;
+          aspect-ratio: 4 / 3;
+          object-fit: cover;
+          display: block;
+        }
+        .gallery-caption {
+          padding: 0.9em 1.2em;
+          background: #f9f9f9;
+          font-size: 1rem;
+          font-weight: 500;
+          color: #1976d2;
+          text-align: center;
+        }
+        @media (max-width: 600px) {
+          .gallery-caption { font-size: 0.92rem; }
+        }
+      </style>
     </section>
 
     <!-- CONTACT SECTION -->
