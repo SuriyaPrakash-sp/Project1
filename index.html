@@ -5,286 +5,1370 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Arivagam School of Nursing – Quality nursing and DMLT education in Tamil Nadu. GNM, medical lab technology, modern facilities and experienced faculty." />
+    content="Arivagam School of Nursing — GNM and DMLT education in Tamil Nadu. A single-page application with Home, About, Services and Contact." />
   <meta name="theme-color" content="#0b2e4a" />
   <title>Arivagam School of Nursing | Quality Healthcare Education</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!--
-    Type system: Fraunces (display serif, used with restraint for headings
-    and the brand mark) + Inter (workhorse sans for everything read at
-    speed: nav, body copy, buttons). See style.css header comment for the
-    full rationale.
-  -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ============================================================
+   THEME TOKENS
+   Palette: deep clinical navy + warm sage + parchment neutral.
+   Type: a restrained serif for headings (mirrors a hand-lettered
+   clinic sign), a plain sans for everything read at speed.
+   No external font/CDN dependency, so the page works fully offline.
+   ============================================================ */
+    :root {
+      --navy: #0b2e4a;
+      --navy-deep: #071e30;
+      --sage: #5f8b6f;
+      --sage-light: #e7f0e9;
+      --clay: #c98a5e;
+      --paper: #f7f4ee;
+      --paper-dim: #efeadf;
+      --ink: #1c2b33;
+      --ink-soft: #4a5a63;
+      --line: #dcd6c8;
+      --white: #ffffff;
+
+      --serif: Georgia, 'Times New Roman', 'Iowan Old Style', serif;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      --radius: 14px;
+      --shadow: 0 12px 30px -14px rgba(11, 46, 74, .25);
+      --transition: .35s cubic-bezier(.4, 0, .2, 1);
+      --nav-h: 72px;
+    }
+
+    /* Respect reduced motion everywhere */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--serif);
+      color: var(--navy-deep);
+      margin: 0 0 .4em;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0 0 1em;
+      color: var(--ink-soft);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--clay);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+
+    /* ============================================================
+   NAVIGATION — fixed bar, active-page highlighting, hash routing
+   ============================================================ */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      background: rgba(247, 244, 238, .9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      transition: box-shadow var(--transition);
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 6px 20px -12px rgba(11, 46, 74, .35);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif);
+      font-weight: 600;
+      color: var(--navy-deep);
+      font-size: 1.15rem;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: .95rem;
+      flex: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: .94rem;
+      color: var(--ink-soft);
+      transition: color var(--transition), background var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--navy-deep);
+      background: var(--paper-dim);
+    }
+
+    .nav-links a[aria-current="page"] {
+      color: var(--navy-deep);
+      background: var(--sage-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      width: 44px;
+      height: 44px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 22px;
+      height: 2px;
+      background: var(--navy-deep);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media (max-width:820px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 2px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+        padding: 10px 16px 18px;
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition), transform var(--transition);
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        width: 100%;
+      }
+    }
+
+    /* ============================================================
+   PAGE / ROUTER MECHANICS
+   Each <section class="page"> is one route. Only the active
+   route is shown; a fade-slide plays on route change.
+   ============================================================ */
+    main {
+      padding-top: var(--nav-h);
+    }
+
+    .page {
+      display: none;
+      animation: pageIn .45s ease both;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================================
+   HERO
+   ============================================================ */
+    .hero {
+      background:
+        radial-gradient(1200px 500px at 85% -10%, rgba(95, 139, 111, .16), transparent 60%),
+        linear-gradient(180deg, var(--paper) 0%, var(--paper-dim) 100%);
+      padding: 76px 0 96px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero h2 {
+      font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+      margin-bottom: .5em;
+    }
+
+    .hero .lede {
+      font-size: 1.08rem;
+      max-width: 46ch;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .95rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-deep);
+    }
+
+    .btn-outline {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    .btn-outline:hover {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .hero-art {
+      aspect-ratio: 4/3.4;
+      border-radius: 20px;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-art svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .pulse-path {
+      fill: none;
+      stroke: var(--sage);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 340;
+      stroke-dashoffset: 340;
+      animation: draw 2.4s ease forwards .3s;
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    /* stat strip, floated as a card over the hero seam */
+    .stats-strip {
+      margin-top: -46px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stats-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+    }
+
+    .stat {
+      padding: 26px 18px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      color: var(--navy);
+    }
+
+    .stat-label {
+      font-size: .8rem;
+      color: var(--ink-soft);
+    }
+
+    @media (max-width:700px) {
+      .stats-card {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat {
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    /* ============================================================
+   SHARED SECTION LAYOUT
+   ============================================================ */
+    .section {
+      padding: 88px 0;
+    }
+
+    .section-alt {
+      background: var(--paper-dim);
+    }
+
+    .section-head {
+      max-width: 640px;
+      margin-bottom: 44px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width:820px) {
+
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px 26px;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--sage-light);
+      color: var(--sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .card-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .card h4 {
+      font-size: 1.1rem;
+    }
+
+    /* Testimonials / trust */
+    .quote-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+
+    .quote-card p {
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    .quote-name {
+      font-weight: 700;
+      color: var(--navy-deep);
+      font-style: normal;
+      margin-top: 14px;
+      font-size: .92rem;
+    }
+
+    .quote-role {
+      font-size: .82rem;
+      color: var(--ink-soft);
+    }
+
+    /* Timeline (About page) */
+    .timeline {
+      border-left: 2px solid var(--line);
+      margin-left: 6px;
+      padding-left: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .tl-item {
+      position: relative;
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -32px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--sage);
+      border: 3px solid var(--paper);
+    }
+
+    .tl-year {
+      font-family: var(--serif);
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    /* Pricing / program table (Services) */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      font-size: .94rem;
+    }
+
+    .pricing-table th {
+      background: var(--navy);
+      color: #fff;
+      font-family: var(--serif);
+      font-weight: 600;
+    }
+
+    .pricing-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pricing-table td strong {
+      color: var(--navy-deep);
+    }
+
+    @media (max-width:700px) {
+      .pricing-table thead {
+        display: none;
+      }
+
+      .pricing-table,
+      .pricing-table tbody,
+      .pricing-table tr,
+      .pricing-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .pricing-table tr {
+        border-bottom: 1px solid var(--line);
+        padding: 14px 20px;
+      }
+
+      .pricing-table td {
+        border: none;
+        padding: 4px 0;
+      }
+
+      .pricing-table td::before {
+        content: attr(data-label) ': ';
+        font-weight: 700;
+        color: var(--navy);
+      }
+    }
+
+    /* ============================================================
+   CONTACT FORM
+   ============================================================ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    @media (max-width:820px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 700;
+      font-size: .86rem;
+      margin-bottom: 6px;
+      color: var(--navy-deep);
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: .96rem;
+      background: var(--white);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px var(--sage-light);
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .field-error {
+      color: #b64545;
+      font-size: .8rem;
+      margin-top: 6px;
+      min-height: 1em;
+    }
+
+    .field.invalid input,
+    .field.invalid textarea {
+      border-color: #b64545;
+    }
+
+    .form-status {
+      font-size: .92rem;
+      font-weight: 600;
+      margin-top: 8px;
+      min-height: 1.2em;
+    }
+
+    .form-status.success {
+      color: var(--sage);
+    }
+
+    .form-status.error {
+      color: #b64545;
+    }
+
+    .contact-info-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .contact-info-item .ci-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--sage-light);
+      color: var(--sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+    }
+
+    .contact-info-item .ci-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ============================================================
+   FOOTER
+   ============================================================ */
+    footer {
+      background: var(--navy-deep);
+      color: #dfe7ea;
+      padding: 56px 0 28px;
+      margin-top: 40px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+
+    .footer-brand h4 {
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand p {
+      color: #a9b8bf;
+      max-width: 34ch;
+      font-size: .9rem;
+    }
+
+    .footer-col h5 {
+      color: #fff;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #a9b8bf;
+      font-size: .92rem;
+      margin-bottom: 10px;
+      transition: color var(--transition);
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-row a {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .social-row a:hover {
+      background: rgba(255, 255, 255, .12);
+      border-color: rgba(255, 255, 255, .4);
+    }
+
+    .social-row svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      padding-top: 22px;
+      font-size: .82rem;
+      color: #8fa0a8;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Skip link for a11y */
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: -60px;
+      background: var(--navy);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      z-index: 2000;
+      transition: top var(--transition);
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- Reusable "vital sign" pulse-line — the page's signature motif.
-       Defined once as a hidden template and cloned by inline <use>
-       wherever a divider is needed, so the whole page shares one mark. -->
-  <svg width="0" height="0" style="position:absolute">
-    <symbol id="pulse-line" viewBox="0 0 120 24">
-      <path d="M0 12 H38 L46 3 L54 21 L62 12 H120" />
-    </symbol>
-  </svg>
+  <a href="#home" class="skip-link">Skip to main content</a>
 
-  <!-- NAVBAR -->
+  <!-- ============================================================
+     NAVIGATION BAR — hash links double as router triggers.
+     ============================================================ -->
   <header>
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-      <div class="brand">
-        <img src="images/logo.jpeg" alt="Arivagam School of Nursing logo" class="logo" />
-        <h1 class="brand-name">Arivagam School of Nursing</h1>
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="#home" class="brand">
+          <span class="brand-mark" aria-hidden="true">A</span>
+          Arivagam School of Nursing
+        </a>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"
+          aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" data-route="home">Home</a></li>
+          <li><a href="#about" data-route="about">About</a></li>
+          <li><a href="#services" data-route="services">Services</a></li>
+          <li><a href="#contact" data-route="contact">Contact</a></li>
+        </ul>
       </div>
-      <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-      </button>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#courses">Courses</a></li>
-        <li><a href="#facilities">Facilities</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
     </nav>
   </header>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="hero-content">
-        <p class="hero-tagline">Excellence in Healthcare Education</p>
-        <h2 id="hero-heading">Building a Healthier Future</h2>
-        <p class="hero-desc">At Arivagam School of Nursing, we prepare future healthcare professionals with rigorous
-          clinical training, genuine compassion, and modern facilities.</p>
-        <div class="hero-buttons">
-          <a href="#about" class="btn btn-primary">Learn More</a>
-          <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  <main id="main">
+
+    <!-- ============================================================
+       HOME PAGE
+       ============================================================ -->
+    <section class="page" id="home" data-title="Home | Arivagam School of Nursing">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Excellence in Healthcare Education</p>
+            <h2>Building a healthier future, one nurse at a time.</h2>
+            <p class="lede">Arivagam School of Nursing prepares future healthcare professionals with rigorous clinical
+              training, genuine compassion, and modern facilities in Tamil Nadu.</p>
+            <div class="hero-cta">
+              <a href="#services" class="btn btn-primary">Explore Programs</a>
+              <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMid slice">
+              <path class="pulse-path" d="M20 200 H140 L165 120 L195 260 L225 160 L255 200 H380" />
+            </svg>
+          </div>
         </div>
-        <div class="pulse-divider" aria-hidden="true" style="margin-top:36px;">
-          <svg viewBox="0 0 120 24">
-            <use href="#pulse-line"></use>
-          </svg>
+      </div>
+
+      <!-- Stats / trust indicators -->
+      <div class="container stats-strip">
+        <div class="stats-card">
+          <div class="stat"><span class="stat-number">2+</span><span class="stat-label">Years of Excellence</span></div>
+          <div class="stat"><span class="stat-number">50+</span><span class="stat-label">Students Trained</span></div>
+          <div class="stat"><span class="stat-number">2</span><span class="stat-label">Professional Courses</span></div>
+          <div class="stat"><span class="stat-number">24/7</span><span class="stat-label">Medical Support</span></div>
+        </div>
+      </div>
+
+      <!-- Features grid -->
+      <div class="section container">
+        <div class="section-head">
+          <p class="eyebrow">Campus Life</p>
+          <h3 class="section-title">Everything you need to learn and grow</h3>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M5 3v7a4 4 0 0 0 4 4h1a4 4 0 0 0 4-4V3" />
+                <path d="M9 14v2a5 5 0 0 0 10 0v-3" />
+                <circle cx="19" cy="9" r="2" />
+              </svg>
+            </div>
+            <h4>Modern Labs</h4>
+            <p>Fully equipped research and clinical labs for hands-on learning and experimentation.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path
+                  d="M12 21s-7-4.35-9.5-8.8C.6 8.6 2.4 5 6 5c2 0 3.4 1.1 4 2 .6-.9 2-2 4-2 3.6 0 5.4 3.6 3.5 7.2C19 16.65 12 21 12 21z" />
+              </svg>
+            </div>
+            <h4>24/7 Medical Support</h4>
+            <p>Round-the-clock medical facilities ensuring the well-being of every student.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+            </div>
+            <h4>Library &amp; Research Center</h4>
+            <p>Thousands of medical journals and research materials for in-depth study.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="section section-alt container">
+        <div class="section-head">
+          <p class="eyebrow">What People Say</p>
+          <h3 class="section-title">Trusted by students and families</h3>
+        </div>
+        <div class="grid-3">
+          <div class="quote-card">
+            <p>"The clinical training here gave me real confidence before my first hospital posting."</p>
+            <p class="quote-name">Divya R.</p>
+            <p class="quote-role">GNM Student, Batch of 2025</p>
+          </div>
+          <div class="quote-card">
+            <p>"Small class sizes meant every student got hands-on time in the lab, not just lectures."</p>
+            <p class="quote-name">Karthik S.</p>
+            <p class="quote-role">DMLT Student</p>
+          </div>
+          <div class="quote-card">
+            <p>"As a parent, the campus safety and 24/7 medical support gave me real peace of mind."</p>
+            <p class="quote-name">Meena V.</p>
+            <p class="quote-role">Parent</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- STATS STRIP — floated as a card over the hero seam for a layered,
-         premium composition rather than a flat full-width bar. -->
-    <section class="stats-strip" aria-label="Key highlights" data-reveal>
-      <div class="stats-inner">
-        <div class="stat">
-          <span class="stat-number">2+</span>
-          <span class="stat-label">Years of Excellence</span>
+    <!-- ============================================================
+       ABOUT PAGE
+       ============================================================ -->
+    <section class="page" id="about" data-title="About | Arivagam School of Nursing">
+      <div class="section container">
+        <div class="section-head">
+          <p class="eyebrow">Who We Are</p>
+          <h3 class="section-title">About Our College</h3>
+          <p>Arivagam School of Nursing is a modern institution dedicated to providing exceptional education and
+            healthcare research facilities. With experienced faculty, world-class infrastructure, and a focus on
+            innovation, we prepare students for real-world challenges in nursing and medical laboratory technology.</p>
         </div>
-        <div class="stat">
-          <span class="stat-number">50+</span>
-          <span class="stat-label">Students Trained</span>
+
+        <div class="grid-2" style="margin-bottom:64px;">
+          <div class="card">
+            <h4>Our Mission</h4>
+            <p>To train compassionate, competent healthcare professionals equipped with the clinical skill and ethical
+              grounding that patients deserve.</p>
+          </div>
+          <div class="card">
+            <h4>Our Vision</h4>
+            <p>To be a recognised centre of healthcare education in Tamil Nadu, known for outcomes, integrity, and
+              student care.</p>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-number">2</span>
-          <span class="stat-label">Professional Courses</span>
+
+        <div class="section-head">
+          <p class="eyebrow">Our Journey</p>
+          <h3 class="section-title">Milestones so far</h3>
         </div>
-        <div class="stat">
-          <span class="stat-number">24/7</span>
-          <span class="stat-label">Medical Support</span>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">2023</div>
+            <p>Arivagam School of Nursing is founded with a focus on GNM and DMLT education.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <p>Modern labs and library facilities completed; first batch of students admitted.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2025</div>
+            <p>First graduating cohort of GNM and DMLT students; student hostel opens.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2026</div>
+            <p>Enrollment grows to 50+ students across two professional programs.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="section" aria-labelledby="about-heading" data-reveal>
-      <p class="eyebrow">Who We Are</p>
-      <h3 id="about-heading" class="section-title">About Our College</h3>
-      <p class="section-subtitle">Dedicated to shaping the next generation of healthcare leaders</p>
-      <p class="section-text">
-        Arivagam School of Nursing is a modern institution dedicated to providing exceptional education and healthcare
-        research facilities.
-        With <strong>experienced faculty</strong>, <strong>world-class infrastructure</strong>, and a focus on
-        innovation, we prepare students for real-world challenges in nursing and medical laboratory technology.
-      </p>
-    </section>
-
-    <!-- COURSES SECTION -->
-    <section id="courses" class="section section-alt" aria-labelledby="courses-heading" data-reveal>
-      <p class="eyebrow">Programs</p>
-      <h3 id="courses-heading" class="section-title">Our Courses</h3>
-      <p class="section-subtitle">Programs designed for today's healthcare industry</p>
-      <div class="cards">
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">DMLT</div>
-          <h4>Diploma in Medical Laboratory Technology</h4>
-          <p>Comprehensive medical education designed to produce skilled and ethical lab technicians.</p>
-        </article>
-        <article class="card card--sage">
-          <div class="card-icon" aria-hidden="true">GNM</div>
-          <h4>General Nursing and Midwifery</h4>
-          <p>Training future nurses with compassion and cutting-edge clinical skills.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- FACILITIES SECTION -->
-    <section id="facilities" class="section" aria-labelledby="facilities-heading" data-reveal>
-      <p class="eyebrow">Campus Life</p>
-      <h3 id="facilities-heading" class="section-title">Campus Facilities</h3>
-      <p class="section-subtitle">Everything you need to learn and grow</p>
-      <div class="cards">
-        <article class="card">
-          <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
-            aria-hidden="true">
-            <path d="M5 3v7a4 4 0 0 0 4 4h1a4 4 0 0 0 4-4V3" />
-            <path d="M9 14v2a5 5 0 0 0 10 0v-3" />
-            <circle cx="19" cy="9" r="2" />
-          </svg>
-          <h4>Modern Labs</h4>
-          <p>Fully equipped research and clinical labs for hands-on learning and experimentation.</p>
-        </article>
-        <article class="card">
-          <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
-            aria-hidden="true">
-            <path
-              d="M12 21s-7-4.35-9.5-8.8C.6 8.6 2.4 5 6 5c2 0 3.4 1.1 4 2 .6-.9 2-2 4-2 3.6 0 5.4 3.6 3.5 7.2C19 16.65 12 21 12 21z" />
-            <path d="M8 12h2l1.2-2.4L12.5 14 14 12h2" />
-          </svg>
-          <h4>24/7 Medical Support</h4>
-          <p>Round-the-clock medical facilities ensuring the well-being of every student.</p>
-        </article>
-        <article class="card">
-          <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
-            aria-hidden="true">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-            <path d="M9 7h7M9 11h5" />
-          </svg>
-          <h4>Library &amp; Research Center</h4>
-          <p>Thousands of medical journals and research materials for in-depth study.</p>
-        </article>
-        <article class="card">
-          <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
-            aria-hidden="true">
-            <path d="M3 20v-8a2 2 0 0 1 2-2h2v10" />
-            <path d="M3 12V6a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6" />
-            <path d="M9 20v-5h10a2 2 0 0 1 2 2v3" />
-            <path d="M13 11h4" />
-          </svg>
-          <h4>Student Hostel</h4>
-          <p>Comfortable and secure accommodation fostering a supportive campus life.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery" class="gallery section-alt" aria-labelledby="gallery-heading" data-reveal>
-      <p class="eyebrow">Around Campus</p>
-      <h3 id="gallery-heading" class="section-title">Campus Gallery</h3>
-      <p class="section-subtitle">Experience life at Arivagam — explore our campus facilities</p>
-      <div class="gallery-grid">
-        <figure class="gallery-item">
-          <img src="images/u.jpeg" alt="State-of-the-art nursing laboratory" loading="lazy" />
-          <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="images/v.jpeg" alt="State-of-the-art nursing laboratory" loading="lazy" />
-          <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="images/q.jpeg" alt="State-of-the-art nursing laboratory" loading="lazy" />
-          <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="images/r.jpeg" alt="Modern classroom environment" loading="lazy" />
-          <figcaption class="gallery-caption">Modern Classrooms</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="images/s.jpeg" alt="Library and research hall" loading="lazy" />
-          <figcaption class="gallery-caption">Library &amp; Research Center</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="images/p.jpeg" alt="Student hostel block" loading="lazy" />
-          <figcaption class="gallery-caption">Student Hostel</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="section section-contact" aria-labelledby="contact-heading" data-reveal>
-      <p class="eyebrow">Get In Touch</p>
-      <h3 id="contact-heading" class="section-title">Contact Us</h3>
-      <p class="section-subtitle">We'd love to hear from you</p>
-      <div class="contact-block">
-        <p class="contact-address">
-          Mettur road, 1912, Rana Nagar Rd, Kuruppanaickenpalayam, Tamil Nadu 638301
-        </p>
-        <div class="contact-links">
-          <a href="mailto:arivagam2022@gmail.com" class="contact-link">arivagam2022@gmail.com</a>
-          <a href="tel:+919865185095" class="contact-link">+91 98651 85095</a>
-          <a href="tel:+919842718881" class="contact-link">+91 98427 18881</a>
+    <!-- ============================================================
+       SERVICES PAGE (programs + pricing)
+       ============================================================ -->
+    <section class="page" id="services" data-title="Services | Arivagam School of Nursing">
+      <div class="section container">
+        <div class="section-head">
+          <p class="eyebrow">Programs</p>
+          <h3 class="section-title">Our Courses</h3>
+          <p>Programs designed for today's healthcare industry.</p>
         </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=Arivagam+School+of+Nursing+Kuruppanaickenpalayam+Tamil+Nadu+638301"
-          target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Directions</a>
+
+        <div class="grid-2" style="margin-bottom:56px;">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M9 2h6v4l4 12H5L9 6V2z" />
+                <path d="M9 14h6" />
+              </svg>
+            </div>
+            <h4>Diploma in Medical Laboratory Technology (DMLT)</h4>
+            <p>Comprehensive medical education designed to produce skilled and ethical lab technicians, with hands-on
+              time in modern diagnostic labs.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path
+                  d="M12 21s-7-4.35-9.5-8.8C.6 8.6 2.4 5 6 5c2 0 3.4 1.1 4 2 .6-.9 2-2 4-2 3.6 0 5.4 3.6 3.5 7.2C19 16.65 12 21 12 21z" />
+              </svg>
+            </div>
+            <h4>General Nursing and Midwifery (GNM)</h4>
+            <p>Training future nurses with compassion and cutting-edge clinical skills through supervised hospital
+              postings.</p>
+          </article>
+        </div>
+
+        <div class="section-head">
+          <p class="eyebrow">Program Details</p>
+          <h3 class="section-title">Duration, eligibility &amp; fees</h3>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Program</th>
+                <th>Duration</th>
+                <th>Eligibility</th>
+                <th>Fee Structure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Program"><strong>DMLT</strong></td>
+                <td data-label="Duration">2 Years</td>
+                <td data-label="Eligibility">10+2 (Science preferred)</td>
+                <td data-label="Fee Structure">Contact admissions for current fees</td>
+              </tr>
+              <tr>
+                <td data-label="Program"><strong>GNM</strong></td>
+                <td data-label="Duration">3 Years + 6 months internship</td>
+                <td data-label="Eligibility">10+2 (any stream, age 17–35)</td>
+                <td data-label="Fee Structure">Contact admissions for current fees</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:16px; font-size:.88rem;">Fees vary by intake and any applicable scholarships. <a
+            href="#contact" style="color:var(--sage); font-weight:700;">Contact us</a> for the current fee schedule.</p>
       </div>
     </section>
+
+    <!-- ============================================================
+       CONTACT PAGE
+       ============================================================ -->
+    <section class="page" id="contact" data-title="Contact | Arivagam School of Nursing">
+      <div class="section container">
+        <div class="section-head">
+          <p class="eyebrow">Get In Touch</p>
+          <h3 class="section-title">Contact Us</h3>
+          <p>We'd love to hear from you.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact form with client-side validation -->
+          <form id="contactForm" novalidate aria-describedby="formStatus">
+            <div class="field" id="fieldName">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required aria-required="true" />
+              <p class="field-error" id="nameError"></p>
+            </div>
+            <div class="field" id="fieldEmail">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" autocomplete="email" required aria-required="true" />
+              <p class="field-error" id="emailError"></p>
+            </div>
+            <div class="field" id="fieldMessage">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required aria-required="true"></textarea>
+              <p class="field-error" id="messageError"></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+
+          <!-- Contact info -->
+          <div>
+            <div class="contact-info-item">
+              <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.6">
+                  <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg></div>
+              <p>Mettur road, 1912, Rana Nagar Rd, Kuruppanaickenpalayam, Tamil Nadu 638301</p>
+            </div>
+            <div class="contact-info-item">
+              <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.6">
+                  <path d="M4 4h16v16H4z" />
+                  <path d="M4 4l8 9 8-9" />
+                </svg></div>
+              <p><a href="mailto:arivagam2022@gmail.com"
+                  style="color:var(--navy); font-weight:600;">arivagam2022@gmail.com</a></p>
+            </div>
+            <div class="contact-info-item">
+              <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.6">
+                  <path
+                    d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z" />
+                </svg></div>
+              <p><a href="tel:+919865185095" style="color:var(--navy); font-weight:600;">+91 98651 85095</a><br /><a
+                  href="tel:+919842718881" style="color:var(--navy); font-weight:600;">+91 98427 18881</a></p>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Arivagam+School+of+Nursing+Kuruppanaickenpalayam+Tamil+Nadu+638301"
+              target="_blank" rel="noopener noreferrer" class="btn btn-outline">Get Directions</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- FOOTER -->
+  <!-- ============================================================
+     FOOTER
+     ============================================================ -->
   <footer>
-    <div class="footer-inner">
-      <p class="footer-logo">Arivagam School of Nursing</p>
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="#about">About</a>
-        <a href="#courses">Courses</a>
-        <a href="#facilities">Facilities</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="footer-rule"></div>
-      <p class="copyright">© 2025 Arivagam School of Nursing. All Rights Reserved.</p>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h4>Arivagam School of Nursing</h4>
+          <p>Quality nursing and medical laboratory technology education in Tamil Nadu.</p>
+          <div class="social-row" style="margin-top:16px;">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path
+                  d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.2-1.5 1.6-1.5H17V3.7C16.6 3.6 15.6 3.5 14.4 3.5c-2.5 0-4.1 1.5-4.1 4.3V10H7.6v3.1h2.7v8h3.2z" />
+              </svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" />
+              </svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6">
+                <rect x="2" y="5" width="20" height="14" rx="4" />
+                <path d="M10 9l6 3-6 3z" fill="currentColor" stroke="none" />
+              </svg></a>
+          </div>
+        </div>
+        <nav class="footer-col" aria-label="Footer navigation">
+          <h5>Navigate</h5>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="mailto:arivagam2022@gmail.com">arivagam2022@gmail.com</a>
+          <a href="tel:+919865185095">+91 98651 85095</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Arivagam School of Nursing. All Rights Reserved.</span>
+        <span>Kuruppanaickenpalayam, Tamil Nadu</span>
+      </div>
     </div>
   </footer>
 
   <script>
     (function () {
-      // Mobile nav toggle (unchanged behaviour from original, kept intact)
-      var toggle = document.querySelector('.menu-toggle');
-      var nav = document.querySelector('.nav-links');
-      if (toggle && nav) {
-        toggle.addEventListener('click', function () {
-          var open = nav.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', open);
-          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        });
-        document.querySelectorAll('.nav-links a').forEach(function (a) {
-          a.addEventListener('click', function () {
-            nav.classList.remove('open');
-            toggle.setAttribute('aria-expanded', 'false');
-            toggle.setAttribute('aria-label', 'Open menu');
-          });
-        });
+      'use strict';
+
+      /* ============================================================
+         NAVIGATION LOGIC — hash-based router
+         Reads location.hash, shows the matching .page, updates the
+         active nav link, document title, and focus for a11y.
+         Falls back to #home for unknown/empty hashes.
+         ============================================================ */
+      var VALID_ROUTES = ['home', 'about', 'services', 'contact'];
+      var pages = document.querySelectorAll('.page');
+      var navLinks = document.querySelectorAll('.nav-links a');
+      var main = document.getElementById('main');
+
+      function currentRoute() {
+        var hash = (location.hash || '').replace('#', '');
+        return VALID_ROUTES.indexOf(hash) !== -1 ? hash : 'home';
       }
 
-      // Subtle, orchestrated scroll-reveal for section entrances.
-      // Respects prefers-reduced-motion via the CSS rule in style.css.
-      var revealEls = document.querySelectorAll('[data-reveal]');
-      if ('IntersectionObserver' in window && revealEls.length) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              io.unobserve(entry.target);
+      function render() {
+        var route = currentRoute();
+
+        pages.forEach(function (p) {
+          p.classList.toggle('active', p.id === route);
+        });
+
+        navLinks.forEach(function (a) {
+          var isActive = a.getAttribute('data-route') === route;
+          if (isActive) { a.setAttribute('aria-current', 'page'); }
+          else { a.removeAttribute('aria-current'); }
+        });
+
+        var activePage = document.getElementById(route);
+        if (activePage) {
+          document.title = activePage.getAttribute('data-title') || 'Arivagam School of Nursing';
+        }
+
+        // Move focus to main content on route change (skips on first load)
+        if (window.__routed) {
+          main.setAttribute('tabindex', '-1');
+          main.focus({ preventScroll: false });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.__routed = true;
+      }
+
+      window.addEventListener('hashchange', render);
+      document.addEventListener('DOMContentLoaded', function () {
+        if (!location.hash) { location.hash = '#home'; }
+        render();
+      });
+
+      // Mobile nav toggle
+      var toggle = document.getElementById('menuToggle');
+      var links = document.getElementById('navLinks');
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
+        });
+      });
+
+      // Navbar shadow on scroll
+      var navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', function () {
+        navbar.classList.toggle('scrolled', window.scrollY > 6);
+      }, { passive: true });
+
+      /* ============================================================
+         CONTACT FORM — client-side validation, no server required.
+         Shows inline errors and a success/error status message.
+         ============================================================ */
+      var form = document.getElementById('contactForm');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var name = document.getElementById('name');
+          var email = document.getElementById('email');
+          var message = document.getElementById('message');
+          var status = document.getElementById('formStatus');
+          var valid = true;
+
+          function setError(fieldWrap, input, errorEl, msg) {
+            if (msg) {
+              fieldWrap.classList.add('invalid');
+              errorEl.textContent = msg;
+              valid = false;
+            } else {
+              fieldWrap.classList.remove('invalid');
+              errorEl.textContent = '';
             }
-          });
-        }, { threshold: 0.12 });
-        revealEls.forEach(function (el) { io.observe(el); });
-      } else {
-        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+          }
+
+          setError(
+            document.getElementById('fieldName'), name, document.getElementById('nameError'),
+            name.value.trim().length < 2 ? 'Please enter your full name.' : ''
+          );
+
+          var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          setError(
+            document.getElementById('fieldEmail'), email, document.getElementById('emailError'),
+            !emailPattern.test(email.value.trim()) ? 'Please enter a valid email address.' : ''
+          );
+
+          setError(
+            document.getElementById('fieldMessage'), message, document.getElementById('messageError'),
+            message.value.trim().length < 10 ? 'Message should be at least 10 characters.' : ''
+          );
+
+          if (!valid) {
+            status.textContent = 'Please fix the highlighted fields.';
+            status.className = 'form-status error';
+            return;
+          }
+
+          // No backend in this single-file build — simulate a successful send.
+          status.textContent = 'Thank you, ' + name.value.trim().split(' ')[0] + '! Your message has been received.';
+          status.className = 'form-status success';
+          form.reset();
+        });
       }
     })();
   </script>
