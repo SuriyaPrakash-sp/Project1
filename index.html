@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Arivagam School of Nursing – Quality nursing and DMLT education in Tamil Nadu. GNM, medical lab technology, modern facilities and experienced faculty." />
-  <meta name="theme-color" content="#0d3b66" />
+  <meta name="description"
+    content="Arivagam School of Nursing – Quality nursing and DMLT education in Tamil Nadu. GNM, medical lab technology, modern facilities and experienced faculty." />
+  <meta name="theme-color" content="#0b2e4a" />
   <title>Arivagam School of Nursing | Quality Healthcare Education</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!--
+    Type system: Fraunces (display serif, used with restraint for headings
+    and the brand mark) + Inter (workhorse sans for everything read at
+    speed: nav, body copy, buttons). See style.css header comment for the
+    full rationale.
+  -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+
+  <!-- Reusable "vital sign" pulse-line — the page's signature motif.
+       Defined once as a hidden template and cloned by inline <use>
+       wherever a divider is needed, so the whole page shares one mark. -->
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="pulse-line" viewBox="0 0 120 24">
+      <path d="M0 12 H38 L46 3 L54 21 L62 12 H120" />
+    </symbol>
+  </svg>
+
   <!-- NAVBAR -->
   <header>
     <nav class="navbar" role="navigation" aria-label="Main navigation">
@@ -37,23 +59,29 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero" aria-labelledby="hero-heading">
-      <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-tagline">Excellence in Healthcare Education</p>
         <h2 id="hero-heading">Building a Healthier Future</h2>
-        <p class="hero-desc">At Arivagam School of Nursing, we empower future healthcare professionals with knowledge, compassion, and technology.</p>
+        <p class="hero-desc">At Arivagam School of Nursing, we prepare future healthcare professionals with rigorous
+          clinical training, genuine compassion, and modern facilities.</p>
         <div class="hero-buttons">
           <a href="#about" class="btn btn-primary">Learn More</a>
           <a href="#contact" class="btn btn-outline">Get in Touch</a>
         </div>
+        <div class="pulse-divider" aria-hidden="true" style="margin-top:36px;">
+          <svg viewBox="0 0 120 24">
+            <use href="#pulse-line"></use>
+          </svg>
+        </div>
       </div>
     </section>
 
-    <!-- STATS STRIP -->
-    <section class="stats-strip" aria-label="Key highlights">
+    <!-- STATS STRIP — floated as a card over the hero seam for a layered,
+         premium composition rather than a flat full-width bar. -->
+    <section class="stats-strip" aria-label="Key highlights" data-reveal>
       <div class="stats-inner">
         <div class="stat">
-          <span class="stat-number" data-count="15">2+</span>
+          <span class="stat-number">2+</span>
           <span class="stat-label">Years of Excellence</span>
         </div>
         <div class="stat">
@@ -72,51 +100,81 @@
     </section>
 
     <!-- ABOUT SECTION -->
-    <section id="about" class="section" aria-labelledby="about-heading">
+    <section id="about" class="section" aria-labelledby="about-heading" data-reveal>
+      <p class="eyebrow">Who We Are</p>
       <h3 id="about-heading" class="section-title">About Our College</h3>
       <p class="section-subtitle">Dedicated to shaping the next generation of healthcare leaders</p>
       <p class="section-text">
-        Arivagam School of Nursing is a modern institution dedicated to providing exceptional education and healthcare research facilities.
-        With experienced faculty, world-class infrastructure, and a focus on innovation, we prepare students for real-world challenges in nursing and medical laboratory technology.
+        Arivagam School of Nursing is a modern institution dedicated to providing exceptional education and healthcare
+        research facilities.
+        With <strong>experienced faculty</strong>, <strong>world-class infrastructure</strong>, and a focus on
+        innovation, we prepare students for real-world challenges in nursing and medical laboratory technology.
       </p>
     </section>
 
     <!-- COURSES SECTION -->
-    <section id="courses" class="section section-alt" aria-labelledby="courses-heading">
+    <section id="courses" class="section section-alt" aria-labelledby="courses-heading" data-reveal>
+      <p class="eyebrow">Programs</p>
       <h3 id="courses-heading" class="section-title">Our Courses</h3>
-      <p class="section-subtitle">Programs designed for today’s healthcare industry</p>
+      <p class="section-subtitle">Programs designed for today's healthcare industry</p>
       <div class="cards">
         <article class="card">
           <div class="card-icon" aria-hidden="true">DMLT</div>
-          <h4>Diploma in Medical Laboratory Technology (DMLT)</h4>
+          <h4>Diploma in Medical Laboratory Technology</h4>
           <p>Comprehensive medical education designed to produce skilled and ethical lab technicians.</p>
         </article>
-        <article class="card">
+        <article class="card card--sage">
           <div class="card-icon" aria-hidden="true">GNM</div>
-          <h4>General Nursing and Midwifery (GNM)</h4>
+          <h4>General Nursing and Midwifery</h4>
           <p>Training future nurses with compassion and cutting-edge clinical skills.</p>
         </article>
       </div>
     </section>
 
     <!-- FACILITIES SECTION -->
-    <section id="facilities" class="section" aria-labelledby="facilities-heading">
+    <section id="facilities" class="section" aria-labelledby="facilities-heading" data-reveal>
+      <p class="eyebrow">Campus Life</p>
       <h3 id="facilities-heading" class="section-title">Campus Facilities</h3>
       <p class="section-subtitle">Everything you need to learn and grow</p>
       <div class="cards">
         <article class="card">
+          <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+            aria-hidden="true">
+            <path d="M5 3v7a4 4 0 0 0 4 4h1a4 4 0 0 0 4-4V3" />
+            <path d="M9 14v2a5 5 0 0 0 10 0v-3" />
+            <circle cx="19" cy="9" r="2" />
+          </svg>
           <h4>Modern Labs</h4>
           <p>Fully equipped research and clinical labs for hands-on learning and experimentation.</p>
         </article>
         <article class="card">
+          <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+            aria-hidden="true">
+            <path
+              d="M12 21s-7-4.35-9.5-8.8C.6 8.6 2.4 5 6 5c2 0 3.4 1.1 4 2 .6-.9 2-2 4-2 3.6 0 5.4 3.6 3.5 7.2C19 16.65 12 21 12 21z" />
+            <path d="M8 12h2l1.2-2.4L12.5 14 14 12h2" />
+          </svg>
           <h4>24/7 Medical Support</h4>
           <p>Round-the-clock medical facilities ensuring the well-being of every student.</p>
         </article>
         <article class="card">
-          <h4>Library & Research Center</h4>
+          <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+            aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            <path d="M9 7h7M9 11h5" />
+          </svg>
+          <h4>Library &amp; Research Center</h4>
           <p>Thousands of medical journals and research materials for in-depth study.</p>
         </article>
         <article class="card">
+          <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+            aria-hidden="true">
+            <path d="M3 20v-8a2 2 0 0 1 2-2h2v10" />
+            <path d="M3 12V6a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6" />
+            <path d="M9 20v-5h10a2 2 0 0 1 2 2v3" />
+            <path d="M13 11h4" />
+          </svg>
           <h4>Student Hostel</h4>
           <p>Comfortable and secure accommodation fostering a supportive campus life.</p>
         </article>
@@ -124,138 +182,43 @@
     </section>
 
     <!-- GALLERY -->
-    <section id="gallery" class="gallery section" aria-labelledby="gallery-heading">
+    <section id="gallery" class="gallery section-alt" aria-labelledby="gallery-heading" data-reveal>
+      <p class="eyebrow">Around Campus</p>
       <h3 id="gallery-heading" class="section-title">Campus Gallery</h3>
-      <p class="section-subtitle">Experience Life at Arivagam – Explore Our Campus Facilities</p>
+      <p class="section-subtitle">Experience life at Arivagam — explore our campus facilities</p>
       <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="images/u.jpeg" alt="State-of-the-art Nursing Laboratory" loading="lazy" />
+        <figure class="gallery-item">
+          <img src="images/u.jpeg" alt="State-of-the-art nursing laboratory" loading="lazy" />
           <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
-        </div>
-        <div class="gallery-item">
-          <img src="images/v.jpeg" alt="State-of-the-art Nursing Laboratory" loading="lazy" />
+        </figure>
+        <figure class="gallery-item">
+          <img src="images/v.jpeg" alt="State-of-the-art nursing laboratory" loading="lazy" />
           <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
-        </div>
-        <div class="gallery-item">
-          <img src="images/q.jpeg" alt="State-of-the-art Nursing Laboratory" loading="lazy" />
+        </figure>
+        <figure class="gallery-item">
+          <img src="images/q.jpeg" alt="State-of-the-art nursing laboratory" loading="lazy" />
           <figcaption class="gallery-caption">Nursing Laboratory</figcaption>
-        </div>
-        <div class="gallery-item">
-          <img src="images/r.jpeg" alt="Modern Classroom Environment" loading="lazy" />
+        </figure>
+        <figure class="gallery-item">
+          <img src="images/r.jpeg" alt="Modern classroom environment" loading="lazy" />
           <figcaption class="gallery-caption">Modern Classrooms</figcaption>
-        </div>
-        <div class="gallery-item">
-          <img src="images/s.jpeg" alt="Library & Research Hall" loading="lazy" />
-          <figcaption class="gallery-caption">Library & Research Center</figcaption>
-        </div>
-        <div class="gallery-item">
-          <img src="images/p.jpeg" alt="Student Hostel Block" loading="lazy" />
+        </figure>
+        <figure class="gallery-item">
+          <img src="images/s.jpeg" alt="Library and research hall" loading="lazy" />
+          <figcaption class="gallery-caption">Library &amp; Research Center</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="images/p.jpeg" alt="Student hostel block" loading="lazy" />
           <figcaption class="gallery-caption">Student Hostel</figcaption>
-        </div>
+        </figure>
       </div>
-      <style>
-        .gallery-grid {
-          display: grid;
-          gap: 2rem;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          margin-top: 2rem;
-        }
-        .gallery-item {
-          background: #fff;
-          border-radius: 10px;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          transition: box-shadow 0.2s;
-        }
-        .gallery-item:hover {
-          box-shadow: 0 8px 32px rgba(0,60,90,0.18);
-        }
-        .gallery-item img {
-          width: 100%;
-          aspect-ratio: 4 / 3;
-          object-fit: cover;
-          display: block;
-        }
-        .gallery-caption {
-          padding: 0.9em 1.2em;
-          background: #f9f9f9;
-          font-size: 1rem;
-          font-weight: 500;
-          color: #1976d2;
-          text-align: center;
-        }
-        /* Enhanced mobile responsiveness */
-        @media (max-width: 800px) {
-          .gallery-grid {
-            gap: 1.2rem;
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 600px) {
-          .gallery-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-          }
-          .gallery-item {
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.09);
-            margin-bottom: 0.5rem;
-          }
-          .gallery-item img {
-            aspect-ratio: 16/10;
-            border-radius: 6px 6px 0 0;
-          }
-          .gallery-caption {
-            font-size: 0.94rem;
-            padding: 0.7em 1em;
-          }
-        }
-      </style>
-      <style>
-        .gallery-grid {
-          display: grid;
-          gap: 2rem;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          margin-top: 2rem;
-        }
-        .gallery-item {
-          background: #fff;
-          border-radius: 10px;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          transition: box-shadow 0.2s;
-        }
-        .gallery-item:hover {
-          box-shadow: 0 8px 32px rgba(0,60,90,0.18);
-        }
-        .gallery-item img {
-          width: 100%;
-          aspect-ratio: 4 / 3;
-          object-fit: cover;
-          display: block;
-        }
-        .gallery-caption {
-          padding: 0.9em 1.2em;
-          background: #f9f9f9;
-          font-size: 1rem;
-          font-weight: 500;
-          color: #1976d2;
-          text-align: center;
-        }
-        @media (max-width: 600px) {
-          .gallery-caption { font-size: 0.92rem; }
-        }
-      </style>
     </section>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="section section-contact" aria-labelledby="contact-heading">
+    <section id="contact" class="section section-contact" aria-labelledby="contact-heading" data-reveal>
+      <p class="eyebrow">Get In Touch</p>
       <h3 id="contact-heading" class="section-title">Contact Us</h3>
-      <p class="section-subtitle">We’d love to hear from you</p>
+      <p class="section-subtitle">We'd love to hear from you</p>
       <div class="contact-block">
         <p class="contact-address">
           Mettur road, 1912, Rana Nagar Rd, Kuruppanaickenpalayam, Tamil Nadu 638301
@@ -265,7 +228,8 @@
           <a href="tel:+919865185095" class="contact-link">+91 98651 85095</a>
           <a href="tel:+919842718881" class="contact-link">+91 98427 18881</a>
         </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=Arivagam+School+of+Nursing+Kuruppanaickenpalayam+Tamil+Nadu+638301" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Directions</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Arivagam+School+of+Nursing+Kuruppanaickenpalayam+Tamil+Nadu+638301"
+          target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Directions</a>
       </div>
     </section>
   </main>
@@ -273,6 +237,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
+      <p class="footer-logo">Arivagam School of Nursing</p>
       <nav class="footer-nav" aria-label="Footer navigation">
         <a href="#about">About</a>
         <a href="#courses">Courses</a>
@@ -280,12 +245,14 @@
         <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
       </nav>
+      <div class="footer-rule"></div>
       <p class="copyright">© 2025 Arivagam School of Nursing. All Rights Reserved.</p>
     </div>
   </footer>
 
   <script>
     (function () {
+      // Mobile nav toggle (unchanged behaviour from original, kept intact)
       var toggle = document.querySelector('.menu-toggle');
       var nav = document.querySelector('.nav-links');
       if (toggle && nav) {
@@ -302,7 +269,25 @@
           });
         });
       }
+
+      // Subtle, orchestrated scroll-reveal for section entrances.
+      // Respects prefers-reduced-motion via the CSS rule in style.css.
+      var revealEls = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window && revealEls.length) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      }
     })();
   </script>
 </body>
+
 </html>
